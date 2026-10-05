@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FIRAS FATHALLAH - ULTIMATE CORE</title>
+  <title>PS4 EXPLOIT CORE</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,700;1,700&family=Tajawal:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700;900&family=Tajawal:wght@700;900&display=swap" rel="stylesheet">
   
   <style>
     :root {
       --neon-cyan: #00f3ff;
       --neon-magenta: #ff0055;
-      --neon-gold: #ffbe0b;
       --dark-space: #05060d;
       --panel-bg: rgba(10, 14, 28, 0.85);
     }
@@ -36,7 +35,7 @@
       position: relative;
     }
 
-    /* لوحة جزيئات وشرارات الطاقة */
+    /* لوحة جزيئات الطاقة */
     #fx-canvas {
       position: absolute;
       top: 0;
@@ -62,144 +61,113 @@
       to { transform: rotate(360deg); }
     }
 
-    /* الإطار الرئيسي بنمط الميكا / أنمي */
+    /* الإطار الرئيسي المستقبلي */
     .hud-container {
       position: relative;
       z-index: 2;
-      width: 92%;
-      max-width: 880px;
-      padding: 45px 35px;
+      width: 90%;
+      max-width: 760px;
+      padding: 40px 30px;
       background: var(--panel-bg);
       border: 2px solid var(--neon-cyan);
-      border-radius: 10px;
-      clip-path: polygon(40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%, 0 40px);
-      box-shadow: 0 0 40px rgba(0, 243, 255, 0.35), inset 0 0 30px rgba(255, 0, 85, 0.2);
+      border-radius: 12px;
+      clip-path: polygon(30px 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px);
+      box-shadow: 0 0 45px rgba(0, 243, 255, 0.35), inset 0 0 25px rgba(255, 0, 85, 0.2);
       text-align: center;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
     }
 
-    /* زخارف وزوايا الميكا */
-    .hud-container::before {
-      content: "SYSTEM RELEASE // OVERDRIVE";
-      position: absolute;
-      top: 10px;
-      left: 45px;
-      font-family: 'Chakra Petch', monospace;
-      font-size: 11px;
-      letter-spacing: 3px;
-      color: var(--neon-magenta);
-    }
-
-    .tag-author {
+    .badge-top {
       display: inline-block;
-      padding: 4px 18px;
-      background: rgba(255, 0, 85, 0.15);
-      border: 1px solid var(--neon-magenta);
-      color: var(--neon-magenta);
+      padding: 5px 16px;
+      background: rgba(0, 243, 255, 0.12);
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan);
       font-family: 'Chakra Petch', sans-serif;
       font-weight: 700;
       font-size: 13px;
       letter-spacing: 2px;
-      transform: skew(-15deg);
-      margin-bottom: 12px;
-      text-shadow: 0 0 10px var(--neon-magenta);
+      margin-bottom: 20px;
+      border-radius: 4px;
+      text-shadow: 0 0 8px var(--neon-cyan);
     }
 
-    /* اسمك الرئيسي بتأثير نيون ميكا جبار */
+    /* العنوان النظيف */
     .main-title {
-      font-family: 'Chakra Petch', 'Tajawal', sans-serif;
-      font-size: 3.5rem;
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 3rem;
       font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 5px;
-      background: linear-gradient(180deg, #ffffff 10%, var(--neon-cyan) 60%, var(--neon-magenta) 100%);
+      letter-spacing: 4px;
+      background: linear-gradient(180deg, #ffffff 20%, var(--neon-cyan) 70%, var(--neon-magenta) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 25px rgba(0, 243, 255, 0.7));
-      margin-bottom: 5px;
-      position: relative;
-    }
-
-    .sub-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #e2e8f0;
-      letter-spacing: 1px;
+      filter: drop-shadow(0 0 20px rgba(0, 243, 255, 0.6));
       margin-bottom: 25px;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
     }
 
-    /* شبكة مؤشرات الحالة الأنمي */
+    /* شبكة مؤشرات الحالة */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 15px;
       margin-bottom: 35px;
     }
 
     .stat-card {
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(0, 0, 0, 0.5);
       border-left: 3px solid var(--neon-cyan);
       border-right: 1px solid rgba(255, 255, 255, 0.05);
       padding: 12px;
-      border-radius: 4px;
-      transform: skew(-8deg);
-      transition: all 0.3s ease;
-    }
-
-    .stat-card:hover {
-      border-left-color: var(--neon-magenta);
-      box-shadow: 0 0 15px rgba(255, 0, 85, 0.3);
+      border-radius: 6px;
+      transform: skew(-6deg);
     }
 
     .stat-card span {
       display: block;
-      font-size: 11px;
+      font-size: 12px;
       color: #94a3b8;
       margin-bottom: 3px;
     }
 
     .stat-card strong {
       font-family: 'Chakra Petch', sans-serif;
-      font-size: 18px;
+      font-size: 17px;
       color: #fff;
-      letter-spacing: 1px;
     }
 
-    /* زر الإطلاق الملحمي */
+    /* زر التفعيل البسيط والمميز */
     .ignite-button {
       position: relative;
       display: inline-block;
-      padding: 20px 65px;
-      font-family: 'Chakra Petch', 'Tajawal', sans-serif;
-      font-size: 24px;
+      padding: 18px 75px;
+      font-family: 'Tajawal', 'Chakra Petch', sans-serif;
+      font-size: 26px;
       font-weight: 900;
       color: #ffffff;
-      text-transform: uppercase;
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       background: linear-gradient(135deg, #ff0055 0%, #7900ff 50%, #00f3ff 100%);
       background-size: 200% 200%;
       border: none;
-      clip-path: polygon(25px 0%, 100% 0%, calc(100% - 25px) 100%, 0% 100%);
+      clip-path: polygon(20px 0%, 100% 0%, calc(100% - 20px) 100%, 0% 100%);
       cursor: pointer;
-      box-shadow: 0 0 35px rgba(255, 0, 85, 0.6), 0 0 60px rgba(0, 243, 255, 0.3);
+      box-shadow: 0 0 35px rgba(255, 0, 85, 0.6), 0 0 50px rgba(0, 243, 255, 0.3);
       animation: pulseGradient 3s ease infinite;
       transition: all 0.25s ease-in-out;
     }
 
     @keyframes pulseGradient {
-      0% { background-position: 0% 50%; box-shadow: 0 0 30px rgba(255, 0, 85, 0.6); }
-      50% { background-position: 100% 50%; box-shadow: 0 0 50px rgba(0, 243, 255, 0.8); }
-      100% { background-position: 0% 50%; box-shadow: 0 0 30px rgba(255, 0, 85, 0.6); }
+      0% { background-position: 0% 50%; box-shadow: 0 0 25px rgba(255, 0, 85, 0.6); }
+      50% { background-position: 100% 50%; box-shadow: 0 0 45px rgba(0, 243, 255, 0.8); }
+      100% { background-position: 0% 50%; box-shadow: 0 0 25px rgba(255, 0, 85, 0.6); }
     }
 
     .ignite-button:hover, .ignite-button:focus {
-      transform: scale(1.08) translateY(-3px);
-      box-shadow: 0 0 60px rgba(0, 243, 255, 0.9), 0 0 80px rgba(255, 0, 85, 0.7);
+      transform: scale(1.06) translateY(-2px);
+      box-shadow: 0 0 55px rgba(0, 243, 255, 0.9);
       outline: none;
     }
 
-    /* شريط تقدم تفاعلي */
+    /* شريط التقدم */
     .gauge-wrapper {
       width: 100%;
       height: 6px;
@@ -223,7 +191,6 @@
       font-size: 15px;
       font-weight: 700;
       color: var(--neon-cyan);
-      letter-spacing: 1px;
       min-height: 24px;
       text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
     }
@@ -235,39 +202,34 @@
   <canvas id="fx-canvas"></canvas>
 
   <div class="hud-container">
-    <div class="tag-author">FIRAS FATHALLAH EDITION</div>
-    <h1 class="main-title">FIRAS FATHALLAH</h1>
-    <div class="sub-title">منظومة فراس فتح الله // كسر الحماية التلقائي</div>
+    <div class="badge-top">SYSTEM EXPLOIT // 13.52</div>
+    <h1 class="main-title">PS4 GOLDHEN</h1>
 
     <div class="stats-grid">
       <div class="stat-card">
         <span>النظام المستهدف</span>
-        <strong>PS4 // FW 13.52</strong>
+        <strong>FW 13.52</strong>
       </div>
       <div class="stat-card">
-        <span>وضع الطاقة</span>
-        <strong id="mode-text">MAX OVERDRIVE</strong>
-      </div>
-      <div class="stat-card">
-        <span>حالة النواة</span>
+        <span>الحالة</span>
         <strong id="core-status" style="color: var(--neon-cyan);">READY</strong>
       </div>
     </div>
 
-    <!-- زر التفعيل الناري -->
+    <!-- زر التفعيل -->
     <button class="ignite-button" id="ignite-btn" onclick="executeCoreExploit()">
-      تفعيل المنظومة ⚡
+      تفعيل
     </button>
 
     <div class="gauge-wrapper" id="gauge">
       <div class="gauge-fill" id="gauge-fill"></div>
     </div>
 
-    <div id="status-display">اضغط على الزر لتفجير طاقة الاستغلال وحقن الـ GoldHEN...</div>
+    <div id="status-display">اضغط على تفعيل للبدء...</div>
   </div>
 
   <script>
-    // نظام جزيئات الطاقة والشرارات (Electric Sparkles & Anime Particles)
+    // مؤثرات الشرارات والجزيئات المتحركة
     const canvas = document.getElementById('fx-canvas');
     const ctx = canvas.getContext('2d');
     let width, height, sparks = [];
@@ -304,7 +266,7 @@
         ctx.save();
         ctx.globalAlpha = this.alpha;
         ctx.fillStyle = this.color;
-        ctx.shadowBlur = 12;
+        ctx.shadowBlur = 10;
         ctx.shadowColor = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -313,7 +275,7 @@
       }
     }
 
-    for (let i = 0; i < 90; i++) {
+    for (let i = 0; i < 75; i++) {
       sparks.push(new EnergySpark());
     }
 
@@ -327,7 +289,7 @@
     }
     renderLoop();
 
-    // تشغيل كود الثغرة وتحديث واجهة الأنمي التفاعلية
+    // تشغيل كود الثغرة
     function executeCoreExploit() {
       const btn = document.getElementById('ignite-btn');
       const gauge = document.getElementById('gauge');
@@ -336,25 +298,25 @@
       const coreStatus = document.getElementById('core-status');
 
       btn.disabled = true;
-      btn.style.filter = "grayscale(60%)";
+      btn.style.filter = "grayscale(70%)";
       gauge.style.display = "block";
-      coreStatus.innerText = "OVERHEATING...";
+      coreStatus.innerText = "RUNNING...";
       coreStatus.style.color = "#ff0055";
 
-      statusDisplay.innerText = "جاري تجميع حزم الذاكرة والتهيئة السريعة...";
-      gaugeFill.style.width = "30%";
+      statusDisplay.innerText = "جاري تفعيل الثغرة، يرجى الانتظار...";
+      gaugeFill.style.width = "40%";
 
       setTimeout(() => {
         gaugeFill.style.width = "75%";
-        statusDisplay.innerText = "تم اختراق الحماية بنجاح! جاري تثبيت GoldHEN...";
+        statusDisplay.innerText = "جاري حقن الـ Payload و GoldHEN...";
 
         setTimeout(() => {
           gaugeFill.style.width = "100%";
-          statusDisplay.innerText = "العملية اكتملت بنجاح! النظام جاهز تماماً.";
-          coreStatus.innerText = "UNLOCKED";
+          statusDisplay.innerText = "اكتمل التفعيل بنجاح!";
+          coreStatus.innerText = "ACTIVE";
           coreStatus.style.color = "#00f3ff";
 
-          // استدعاء ملف تشغيل الثغرة الأصلي الموجود في المستودع
+          // استدعاء دوال الثغرة الموجودة في المستودع
           if (typeof runExploit === "function") {
             runExploit();
           } else if (typeof run === "function") {
