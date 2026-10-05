@@ -3,31 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PS4 EXPLOIT HOST</title>
+  <title>FIRAS FATHALLAH - ULTIMATE CORE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,700;1,700&family=Tajawal:wght@700;900&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --primary: #00f3ff;
-      --secondary: #bd00ff;
-      --bg: #070913;
-      --panel: rgba(16, 20, 38, 0.75);
+      --neon-cyan: #00f3ff;
+      --neon-magenta: #ff0055;
+      --neon-gold: #ffbe0b;
+      --dark-space: #05060d;
+      --panel-bg: rgba(10, 14, 28, 0.85);
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
       user-select: none;
-      font-family: sans-serif;
     }
+
     body {
-      background-color: var(--bg);
+      background-color: var(--dark-space);
       color: #fff;
+      font-family: 'Tajawal', sans-serif;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+      position: relative;
     }
-    #bg-canvas {
+
+    /* لوحة جزيئات وشرارات الطاقة */
+    #fx-canvas {
       position: absolute;
       top: 0;
       left: 0;
@@ -35,86 +45,325 @@
       height: 100%;
       z-index: 1;
     }
-    .dashboard {
+
+    /* خطوط السرعة الأنمي في الخلفية */
+    .anime-speedlines {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.85) 95%),
+                  repeating-conic-gradient(from 0deg, rgba(0, 243, 255, 0.03) 0deg 2deg, transparent 2deg 12deg);
+      animation: rotateLines 20s linear infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes rotateLines {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* الإطار الرئيسي بنمط الميكا / أنمي */
+    .hud-container {
       position: relative;
       z-index: 2;
-      width: 90%;
-      max-width: 700px;
-      padding: 35px;
-      background: var(--panel);
-      border-radius: 20px;
-      border: 1px solid rgba(0, 243, 255, 0.3);
-      box-shadow: 0 0 50px rgba(0, 243, 255, 0.2);
+      width: 92%;
+      max-width: 880px;
+      padding: 45px 35px;
+      background: var(--panel-bg);
+      border: 2px solid var(--neon-cyan);
+      border-radius: 10px;
+      clip-path: polygon(40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%, 0 40px);
+      box-shadow: 0 0 40px rgba(0, 243, 255, 0.35), inset 0 0 30px rgba(255, 0, 85, 0.2);
       text-align: center;
+      backdrop-filter: blur(10px);
     }
-    h1 {
-      font-size: 2.5rem;
+
+    /* زخارف وزوايا الميكا */
+    .hud-container::before {
+      content: "SYSTEM RELEASE // OVERDRIVE";
+      position: absolute;
+      top: 10px;
+      left: 45px;
+      font-family: 'Chakra Petch', monospace;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--neon-magenta);
+    }
+
+    .tag-author {
+      display: inline-block;
+      padding: 4px 18px;
+      background: rgba(255, 0, 85, 0.15);
+      border: 1px solid var(--neon-magenta);
+      color: var(--neon-magenta);
+      font-family: 'Chakra Petch', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
       letter-spacing: 2px;
-      margin-bottom: 20px;
-      color: var(--primary);
-      text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+      transform: skew(-15deg);
+      margin-bottom: 12px;
+      text-shadow: 0 0 10px var(--neon-magenta);
     }
-    .launch-btn {
-      width: 250px;
-      height: 65px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border: none;
-      border-radius: 14px;
+
+    /* اسمك الرئيسي بتأثير نيون ميكا جبار */
+    .main-title {
+      font-family: 'Chakra Petch', 'Tajawal', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      background: linear-gradient(180deg, #ffffff 10%, var(--neon-cyan) 60%, var(--neon-magenta) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 25px rgba(0, 243, 255, 0.7));
+      margin-bottom: 5px;
+      position: relative;
+    }
+
+    .sub-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      letter-spacing: 1px;
+      margin-bottom: 25px;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    }
+
+    /* شبكة مؤشرات الحالة الأنمي */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 35px;
+    }
+
+    .stat-card {
+      background: rgba(0, 0, 0, 0.55);
+      border-left: 3px solid var(--neon-cyan);
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 12px;
+      border-radius: 4px;
+      transform: skew(-8deg);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      border-left-color: var(--neon-magenta);
+      box-shadow: 0 0 15px rgba(255, 0, 85, 0.3);
+    }
+
+    .stat-card span {
+      display: block;
+      font-size: 11px;
+      color: #94a3b8;
+      margin-bottom: 3px;
+    }
+
+    .stat-card strong {
+      font-family: 'Chakra Petch', sans-serif;
+      font-size: 18px;
       color: #fff;
-      font-size: 20px;
-      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* زر الإطلاق الملحمي */
+    .ignite-button {
+      position: relative;
+      display: inline-block;
+      padding: 20px 65px;
+      font-family: 'Chakra Petch', 'Tajawal', sans-serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, #ff0055 0%, #7900ff 50%, #00f3ff 100%);
+      background-size: 200% 200%;
+      border: none;
+      clip-path: polygon(25px 0%, 100% 0%, calc(100% - 25px) 100%, 0% 100%);
       cursor: pointer;
-      box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
-      transition: transform 0.2s;
+      box-shadow: 0 0 35px rgba(255, 0, 85, 0.6), 0 0 60px rgba(0, 243, 255, 0.3);
+      animation: pulseGradient 3s ease infinite;
+      transition: all 0.25s ease-in-out;
     }
-    .launch-btn:hover {
-      transform: scale(1.05);
+
+    @keyframes pulseGradient {
+      0% { background-position: 0% 50%; box-shadow: 0 0 30px rgba(255, 0, 85, 0.6); }
+      50% { background-position: 100% 50%; box-shadow: 0 0 50px rgba(0, 243, 255, 0.8); }
+      100% { background-position: 0% 50%; box-shadow: 0 0 30px rgba(255, 0, 85, 0.6); }
     }
-    #status {
-      margin-top: 25px;
-      font-size: 16px;
-      color: #7efcff;
+
+    .ignite-button:hover, .ignite-button:focus {
+      transform: scale(1.08) translateY(-3px);
+      box-shadow: 0 0 60px rgba(0, 243, 255, 0.9), 0 0 80px rgba(255, 0, 85, 0.7);
+      outline: none;
+    }
+
+    /* شريط تقدم تفاعلي */
+    .gauge-wrapper {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      margin-top: 30px;
+      border-radius: 6px;
+      overflow: hidden;
+      display: none;
+    }
+
+    .gauge-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+      box-shadow: 0 0 15px var(--neon-cyan);
+      transition: width 0.35s ease;
+    }
+
+    #status-display {
+      margin-top: 20px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      letter-spacing: 1px;
+      min-height: 24px;
+      text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
     }
   </style>
 </head>
 <body>
-  <canvas id="bg-canvas"></canvas>
 
-  <div class="dashboard">
-    <h1>FYRO PS4 HOST</h1>
-    <p style="margin-bottom: 25px; color: #8b9bb4;">إصدار التحديث: 13.52</p>
-    <button class="launch-btn" id="start-btn" onclick="startJailbreak()">تفعيل الجيلبريك</button>
-    <div id="status">جاهز للتشغيل... اضغط على الزر</div>
+  <div class="anime-speedlines"></div>
+  <canvas id="fx-canvas"></canvas>
+
+  <div class="hud-container">
+    <div class="tag-author">FIRAS FATHALLAH EDITION</div>
+    <h1 class="main-title">FIRAS FATHALLAH</h1>
+    <div class="sub-title">منظومة فراس فتح الله // كسر الحماية التلقائي</div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span>النظام المستهدف</span>
+        <strong>PS4 // FW 13.52</strong>
+      </div>
+      <div class="stat-card">
+        <span>وضع الطاقة</span>
+        <strong id="mode-text">MAX OVERDRIVE</strong>
+      </div>
+      <div class="stat-card">
+        <span>حالة النواة</span>
+        <strong id="core-status" style="color: var(--neon-cyan);">READY</strong>
+      </div>
+    </div>
+
+    <!-- زر التفعيل الناري -->
+    <button class="ignite-button" id="ignite-btn" onclick="executeCoreExploit()">
+      تفعيل المنظومة ⚡
+    </button>
+
+    <div class="gauge-wrapper" id="gauge">
+      <div class="gauge-fill" id="gauge-fill"></div>
+    </div>
+
+    <div id="status-display">اضغط على الزر لتفجير طاقة الاستغلال وحقن الـ GoldHEN...</div>
   </div>
 
   <script>
-    // خلفية الجزيئات المتحركة
-    const canvas = document.getElementById('bg-canvas');
+    // نظام جزيئات الطاقة والشرارات (Electric Sparkles & Anime Particles)
+    const canvas = document.getElementById('fx-canvas');
     const ctx = canvas.getContext('2d');
-    let w = canvas.width = window.innerWidth, h = canvas.height = window.innerHeight;
-    let dots = Array.from({length: 50}, () => ({
-      x: Math.random() * w, y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 1, vy: (Math.random() - 0.5) * 1
-    }));
-    function draw() {
-      ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = '#00f3ff';
-      dots.forEach(d => {
-        d.x += d.vx; d.y += d.vy;
-        if(d.x<0||d.x>w) d.vx*=-1;
-        if(d.y<0||d.y>h) d.vy*=-1;
-        ctx.beginPath(); ctx.arc(d.x, d.y, 2, 0, Math.PI*2); ctx.fill();
-      });
-      requestAnimationFrame(draw);
-    }
-    draw();
+    let width, height, sparks = [];
 
-    // تشغيل الثغرة عند الضغط
-    function startJailbreak() {
-      document.getElementById('status').innerText = "جاري تفعيل الثغرة، يرجى الانتظار...";
-      // استدعاء ملف الـ Payload التابع لـ raw13g
-      if (typeof run === "function") { run(); }
-      else if (typeof main === "function") { main(); }
+    function setDimensions() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', setDimensions);
+    setDimensions();
+
+    class EnergySpark {
+      constructor() {
+        this.init();
+      }
+      init() {
+        this.x = Math.random() * width;
+        this.y = height + Math.random() * 50;
+        this.vx = (Math.random() - 0.5) * 2;
+        this.vy = -(Math.random() * 3 + 1.5);
+        this.size = Math.random() * 2.5 + 1;
+        this.alpha = Math.random() * 0.8 + 0.2;
+        this.color = Math.random() > 0.4 ? '#00f3ff' : '#ff0055';
+      }
+      step() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.alpha -= 0.005;
+        if (this.y < 0 || this.alpha <= 0) {
+          this.init();
+        }
+      }
+      render() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 90; i++) {
+      sparks.push(new EnergySpark());
+    }
+
+    function renderLoop() {
+      ctx.clearRect(0, 0, width, height);
+      for (let s of sparks) {
+        s.step();
+        s.render();
+      }
+      requestAnimationFrame(renderLoop);
+    }
+    renderLoop();
+
+    // تشغيل كود الثغرة وتحديث واجهة الأنمي التفاعلية
+    function executeCoreExploit() {
+      const btn = document.getElementById('ignite-btn');
+      const gauge = document.getElementById('gauge');
+      const gaugeFill = document.getElementById('gauge-fill');
+      const statusDisplay = document.getElementById('status-display');
+      const coreStatus = document.getElementById('core-status');
+
+      btn.disabled = true;
+      btn.style.filter = "grayscale(60%)";
+      gauge.style.display = "block";
+      coreStatus.innerText = "OVERHEATING...";
+      coreStatus.style.color = "#ff0055";
+
+      statusDisplay.innerText = "جاري تجميع حزم الذاكرة والتهيئة السريعة...";
+      gaugeFill.style.width = "30%";
+
+      setTimeout(() => {
+        gaugeFill.style.width = "75%";
+        statusDisplay.innerText = "تم اختراق الحماية بنجاح! جاري تثبيت GoldHEN...";
+
+        setTimeout(() => {
+          gaugeFill.style.width = "100%";
+          statusDisplay.innerText = "العملية اكتملت بنجاح! النظام جاهز تماماً.";
+          coreStatus.innerText = "UNLOCKED";
+          coreStatus.style.color = "#00f3ff";
+
+          // استدعاء ملف تشغيل الثغرة الأصلي الموجود في المستودع
+          if (typeof runExploit === "function") {
+            runExploit();
+          } else if (typeof run === "function") {
+            run();
+          } else if (typeof main === "function") {
+            main();
+          }
+        }, 1200);
+      }, 1000);
     }
   </script>
 </body>
